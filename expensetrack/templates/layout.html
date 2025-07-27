@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{% block title %} Home {% endblock %} - Expenses track app</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <style type="text/tailwindcss">
+      @theme {
+        --color-clifford: #da373d;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="flex flex-col justify-between min-h-screen">
+      <div class="border-b border-gray-200 bg-white shadow-sm">
+        <nav
+          class="flex items-center justify-between w-full max-w-7xl mx-auto px-4"
+        >
+          <a href="/" class="text-xl font-bold text-clifford text-sky-500 py-5">
+            Expenses App
+          </a>
+
+          <div class="flex items-center space-x-4">
+            <a class="text-sky-500 hover:text-sky-700"
+              href="{% url 'expenses:index' %}"
+              class="px-4 py-2"
+              >Expenses</a
+            >
+            <a class="text-sky-500 hover:text-sky-700"
+              href="{% url 'expenses:create' %}"
+              class="px-4 py-2"
+              >New</a
+            >
+
+            <a class="text-sky-500 hover:text-sky-700"
+              href="{% url 'about' %}"
+              class="px-4 py-2"
+              >About</a
+            >
+
+          </div>
+        </nav>
+      </div>
+
+      <div class="flex-grow">
+        <div class="w-full max-w-7xl mx-auto px-4 my-10">
+          {% block content %} {% endblock %}
+        </div>
+      </div>
+
+      <div class="border-t border-gray-200 bg-gray-100 py-10">
+        <div class="w-full max-w-7xl mx-auto px-4">
+          &copy; 2025 - Julian F. Kataleko
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
