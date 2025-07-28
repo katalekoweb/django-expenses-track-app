@@ -1,13 +1,70 @@
 {% extends "layout.html" %} 
-
-{% block title %} Controle de Gastos App 
-
+{% block title %} 
+Controle de Gastos App 
 {% endblock %} 
 
 {% block content %}
-<div class="bg-gradient-to-r via-white from-sky-400 to-white p-4 rounded-xl shadow-md">
-  <h1 class="text-2xl font-bold uppercase">Lista de gastos</h1>
-  <p class="mt-4">Bemvindo ao seu app de controle de gastos</p>
-  <p class="mt-2">Aqui podes gerir as suas finanças com eficiência.</p>
+<div class="bg-gradient-to-r via-white from-sky-400 to-white p-4 rounded-xl shadow-md flex items-center justify-between space-x-4">
+
+  <div>
+    <h1 class="text-2xl font-bold uppercase">Lista de gastos</h1>
+    <p class="mt-4">Bemvindo ao seu app de controle de gastos</p>
+    <p class="mt-2">Aqui podes gerir as suas finanças com eficiência.</p>
+  </div>
+
+  <div class="flex flex-col items-center space-y-4">
+      <div class="w-full text-xl flex flex-col items-center justify-center border rounded-md p-2">
+        <span class="text-sky-500  font-bold">Total de gastos hoje:</span>
+        <span class="text-gray-800 text-3xl">{{ stats.today_total|floatformat:2 }} Kz</span>
+      </div>
+
+       <div class="text-xl flex flex-col items-center justify-center border rounded-md p-2">
+        <span class="text-sky-500  font-bold">Total de gastos esta semana:</span>
+        <span class="text-gray-800 text-3xl">{{ stats.current_week_total|floatformat:2 }} Kz</span>
+      </div>
+
+  </div>
+
 </div>
+
+<div class="mt-7 w-full overflow-x-auto">
+  <table class="w-full">
+    <thead>
+      <tr class="bg-gray-200">
+        <th>ID</th>
+        <th>Title</th>
+        <th>Amount</th>
+        <th>Açoes</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for expense in expenses %}
+      <tr class="odd:bg-gray-100 even:bg-white">
+        <td>{{ expense.id }}</td>
+        <td>{{ expense.title }}</td>
+        <td>{{ expense.amount }}</td>
+        <td>
+          <div class="space-x-2 flex">
+            <a href="{% url 'expenses:edit' expense.id %}">Edit</a>
+            <form action="{% url 'expenses:destroy' expense.id %}" method="post">
+              {% csrf_token %}
+              <button type="submit" onclick="return confirm('Tem certeza?')" class="text-red-500 hover:text-red-700">
+                Delete
+              </button>
+            </form>
+          </div>
+        </td>
+      </tr>
+      {% empty %}
+      <tr>
+        <td colspan="4" class="text-center">
+          <div class="icon text-center"></div>
+          <div class="text-center">No records found! Start adding now!</div>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+
 {% endblock %}
