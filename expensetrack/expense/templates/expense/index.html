@@ -13,12 +13,12 @@ Controle de Gastos App
   </div>
 
   <div class="flex flex-col items-center space-y-4">
-      <div class="w-full text-xl flex flex-col items-center justify-center border rounded-md p-2">
+      <div class="w-full text-xl flex flex-col items-center justify-center border border-gray-200 rounded-md p-2">
         <span class="text-sky-500  font-bold">Total de gastos hoje:</span>
         <span class="text-gray-800 text-3xl">{{ stats.today_total|floatformat:2 }} Kz</span>
       </div>
 
-       <div class="text-xl flex flex-col items-center justify-center border rounded-md p-2">
+       <div class="text-xl flex flex-col items-center justify-center border border-gray-200 rounded-md p-2">
         <span class="text-sky-500  font-bold">Total de gastos esta semana:</span>
         <span class="text-gray-800 text-3xl">{{ stats.current_week_total|floatformat:2 }} Kz</span>
       </div>
